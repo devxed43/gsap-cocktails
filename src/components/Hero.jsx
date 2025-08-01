@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import gsap from "gsap";
 
 const Hero = () => {
+  const videoRef = useRef();
+
+  //   set what size mobile is
+  const isMobile = useMediaQuery({ maxWidth: "767px" });
+
   useGSAP(() => {
     // splits the title classes into characters and words
     const heroSplit = new SplitText(".title", { type: "chars, words" });
@@ -43,6 +49,32 @@ const Hero = () => {
       })
       .to(".right-leaf", { y: 200 }, 0) // moves up
       .to(".left-leaf", { y: -200 }, 0); // moves down
+
+    //   where animation will start and end
+
+    // mobile: when top of video reaches 50% down screen animation starts
+    // desktop: when center of video reaches 60% down the screen
+    const startValue = isMobile ? "top 50%" : "center 60%";
+
+    // mobile: when top of video goes 120% past top of screen, end animation
+    // desktop: when bottom of video reaches top of screen animation ends
+    const endValue = isMobile ? "120% top" : "bottom top";
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "video",
+        start: startValue,
+        end: endValue,
+        scrub: true, // start on scroll
+        pin: true, // keeps video pinned
+      },
+    });
+
+    videoRef.current.onloadedmetadata = () => {
+      tl.to(videoRef.current, {
+        currentTime: videoRef.current.duration,
+      });
+    };
   }, []);
 
   return (
@@ -79,6 +111,17 @@ const Hero = () => {
           </div>
         </div>
       </section>
+
+      {/* video div does not interact with other elements */}
+      <div className="video absolute inset-0">
+        <video
+          src="/videos/output.mp4"
+          ref={videoRef}
+          muted
+          playsInline
+          preload="auto"
+        />
+      </div>
     </>
   );
 };
