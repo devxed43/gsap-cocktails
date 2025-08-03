@@ -1,7 +1,7 @@
 import React from "react";
 import { goodLists, featureLists } from "../../constants/index.js";
+import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
-import { useMediaQuery } from "react-responsive"; // cool effects
 import gsap from "gsap";
 
 const Art = () => {
@@ -15,8 +15,8 @@ const Art = () => {
         trigger: "#art",
         start,
         end: "bottom center",
-        scrub: 1.5, // smooth scroll control
-        pin: true, // fixed position for art section
+        scrub: 1.5,
+        pin: true,
       },
     });
 
@@ -27,7 +27,7 @@ const Art = () => {
         ease: "power1.inOut",
       })
       .to(".masked-img", {
-        scale: 1.2,
+        scale: 1.3,
         maskPosition: "center",
         maskSize: "400%",
         duration: 1,
@@ -39,10 +39,12 @@ const Art = () => {
         ease: "power1.inOut",
       });
   });
+
   return (
     <div id="art">
       <div className="container mx-auto h-full pt-20">
         <h2 className="will-fade">The Art</h2>
+
         <div className="content">
           <ul className="space-y-4 will-fade">
             {goodLists.map((feature, index) => (
@@ -52,14 +54,15 @@ const Art = () => {
               </li>
             ))}
           </ul>
+
           <div className="cocktail-img">
-            {/* mask uses a regular image and adds another image inside it to fill the shape */}
             <img
               src="/images/under-img.jpg"
               alt="cocktail"
               className="abs-center masked-img size-full object-contain"
             />
           </div>
+
           <ul className="space-y-4 will-fade">
             {featureLists.map((feature, index) => (
               <li key={index} className="flex items-center justify-start gap-2">
@@ -73,10 +76,10 @@ const Art = () => {
         <div className="masked-container">
           <h2 className="will-fade">Sip-Worthy Perfection</h2>
           <div id="masked-content">
-            <h3 className="bg-black">Made with Craft, Poured with Passion</h3>
+            <h3>Made with Craft, Poured with Passion</h3>
             <p>
               This isn't just a drink. It's a carefully crafted moment made just
-              for you
+              for you{" "}
             </p>
           </div>
         </div>

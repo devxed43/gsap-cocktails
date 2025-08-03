@@ -5,7 +5,6 @@ import { SplitText } from "gsap/all";
 
 const About = () => {
   useGSAP(() => {
-    // split the h2 inside of about by a words
     const titleSplit = SplitText.create("#about h2", {
       type: "words",
     });
@@ -33,7 +32,7 @@ const About = () => {
           ease: "power1.inOut",
           stagger: 0.04,
         },
-        "-=0.5" // start half a secone before prev one ends
+        "-=0.5"
       );
   });
   return (
@@ -43,29 +42,28 @@ const About = () => {
           <div className="md:col-span-8">
             <p className="badge">Best Cocktails</p>
             <h2>
-              Where every detail matters <span className="text-white">-</span>
+              Where every detail matters<span>-</span>
               from muddle to garnish
             </h2>
           </div>
           <div className="sub-content">
             <p>
               Every cocktail we serve is a reflection of our obsession with
-              detail - from the first muddle tot he final garnish. That care is
-              what turns a simple drink into somethikng truly memorable.
+              detail - from the first muddle to the final garnish. That care is
+              what turns a simple drink into something truly memorable
             </p>
             <div>
               <p className="md:text-3xl text-xl font-bold">
                 <span>4.5</span>/5
               </p>
               <p className="text-sm text-white-100">
-                More than +12000 customers
+                more than +12000 customers
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* top grid */}
       <div className="top-grid">
         <div className="md:col-span-3">
           <div className="noisy" />
@@ -82,8 +80,6 @@ const About = () => {
           <img src="/images/abt5.png" alt="grid-img-1" />
         </div>
       </div>
-
-      {/* bottom grid */}
       <div className="bottom-grid">
         <div className="md:col-span-8">
           <div className="noisy" />
